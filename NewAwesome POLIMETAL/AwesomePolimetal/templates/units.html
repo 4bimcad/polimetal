@@ -1,0 +1,302 @@
+{% include "header.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{%  if user.is_authenticated %}
+
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<div class="container">
+<br>	
+
+<div class="col-md-12">
+	<div class="row"> 
+  <div class="col-md-3">
+<p> 
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">TM</span>
+  </div>
+ <input class="form form-control" type="number" id="TM1" placeholder="0" oninput="tmtc()">  
+</div>   
+<span id="TC11" ></span><b><span style="color: #34981F;"> TC</span></b>
+<hr>   
+  
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">TC</span>
+  </div>
+ <input  class="form form-control" type="number" placeholder="0" id="TC1" oninput="tmtc()">
+</div>  
+<span id="TM11" ></span><b><span style="color: #34981F;"> TM</span></b>
+</p>
+<hr> 
+
+</div>
+
+  
+<div class="col-md-3">
+<p>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">oz/TC</span>
+  </div>
+ <input  class="form form-control" type="number" placeholder="0" id="ozTC1" oninput="oztc1()">  
+</div>
+<span id="gkg1" ></span><b><span style="color: #34981F;"> g/kg</span></b>
+<br>	
+<span id="gtm1" ></span><b><span style="color: #34981F;"> g/TM</span></b>
+<br>
+<span id="porc1" ></span><b><span style="color: #34981F;"> %</span></b>
+</p>
+<hr>    
+</div>
+
+<div class="col-md-3">
+<p>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">oz/TM</span>
+  </div>
+    <input  class="form form-control" type="number" placeholder="0" id="ozTM1" oninput="oztm1()"> 
+</div>
+<span id="oztc2" ></span><b><span style="color: #34981F;"> oz/TC</span></b>
+<br>
+<span id="gtm2" ></span><b><span style="color: #34981F;"> g/TM</span></b>
+<br>
+<span id="gkg2" ></span><b><span style="color: #34981F;"> g/kg</span></b>
+<br>
+<span id="porc2" ></span><b><span style="color: #34981F;"> %</span></b>
+</p>
+<hr>    
+</div>  
+
+<div class="col-md-3">
+<p>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">g/TM</span>
+  </div>
+  <input  class="form form-control" type="number" placeholder="0" id="gtm3" oninput="gtm3()"> 
+</div>
+<span id="oztc3" ></span><b><span style="color: #34981F;"> oz/TC</span></b>
+<br>
+<span id="oztm3" ></span><b><span style="color: #34981F;"> oz/TM</span></b>
+<br>
+<span id="ppm" ></span><b><span style="color: #34981F;"> ppm</span></b>
+</p>
+<hr>    
+</div>
+
+<div class="col-md-3">
+<p>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">%</span>
+  </div>
+    <input  class="form form-control" type="number" placeholder="0" id="porc3" oninput="porc3()"> 
+</div>
+<span id="oztc4" ></span><b><span style="color: #34981F;"> oz/TC</span></b>
+<br>
+<span id="oztm4" ></span><b><span style="color: #34981F;"> oz/TM</span></b>
+<br>
+<span id="ppm2" ></span><b><span style="color: #34981F;"> ppm</span></b>
+</p>
+<hr>    
+</div>
+
+<div class="col-md-3">
+<p>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">ppm</span>
+  </div>
+  <input  class="form form-control" type="number" placeholder="0" id="ppm4" oninput="ppm()"> 
+</div>
+<span id="porc4" ></span><b><span style="color: #34981F;"> %</span></b>
+</p>
+<hr>    
+</div>  
+
+<div class="col-md-3">
+<p>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">kg/TM</span>
+  </div>
+  <input  class="form form-control" type="number" placeholder="0" id="kgtm5" oninput="kgtm5()"> 
+</div> 
+<span id="oztc5"></span><b><span style="color: #34981F;"> oz/TC</span></b>
+<br>
+<span id="oztm5"></span><b><span style="color: #34981F;"> oz/TM</span></b>
+</p>
+<hr>    
+</div>
+
+</div>
+</div>
+
+
+<!-- script tm a tc and reverse -->
+<script>
+  function tmtc (){
+        var TM1 = $('#TM1').val();
+        var TC1 = $('#TC1').val();
+        var TC11 =  TM1 * 1.1023113;
+        var TM11 =  TC1 * 0.90718475;
+        
+
+        TC11 = TC11.toFixed(5);    
+        $('#TC11').html(TC11);
+        TM11 = TM11.toFixed(5);
+        $('#TM11').html(TM11);
+       
+  }
+</script>
+<!-- //script tm a tc and reverse -->
+
+<!-- script oz/tc   -->
+<script>
+  function oztc1 (){
+        var ozTC1 = $('#ozTC1').val();
+        
+        var gtm1 =  ozTC1 * 34.28571;
+        var gkg1 =  ozTC1 * 0.03428571;
+        var porc1 = ozTC1 * 0.003428571;
+
+        gtm1 = gtm1.toFixed(5);    
+        $('#gtm1').html(gtm1);
+        gkg1 = gkg1.toFixed(5);
+        $('#gkg1').html(gkg1);
+        porc1 = porc1.toFixed(5);
+        $('#porc1').html(porc1);
+       
+  }
+</script>
+<!-- //script oz/tc -->
+
+<!-- script oz/TM   -->
+<script>
+  function oztm1 (){
+        var ozTM1 = $('#ozTM1').val();
+        
+        var oztc2 =  ozTM1 * 0.90718495;
+        var gtm2 =  ozTM1 * 31.10348;
+        var gkg2 =  ozTM1 * 0.03110348;
+        var porc2 = ozTM1 * 0.003110348;
+
+        oztc2 = oztc2.toFixed(5);    
+        $('#oztc2').html(oztc2);
+
+        gtm2 = gtm2.toFixed(5);    
+        $('#gtm2').html(gtm2);
+
+        gkg2 = gkg2.toFixed(5);
+        $('#gkg2').html(gkg2);
+
+        porc2 = porc2.toFixed(5);
+        $('#porc2').html(porc2);
+       
+  }
+</script>
+<!-- //script oz/TM -->
+
+
+<!-- script g/TM   -->
+<script>
+  function gtm3 (){
+        var gtm3 = $('#gtm3').val();
+        
+        var oztc3 =  gtm3 * 0.02916667;
+        var oztm3 =  gtm3 * 0.03215075;
+        var ppm = gtm3 * 1;
+
+       
+        oztc3 = oztc3.toFixed(5);    
+        $('#oztc3').html(oztc3);
+
+        oztm3 = oztm3.toFixed(5);
+        $('#oztm3').html(oztm3);
+
+        ppm = ppm.toFixed(5);
+        $('#ppm').html(ppm);
+       
+  }
+</script>
+<!-- //script g/TM -->
+
+<hr>
+
+<!-- script porcientos   -->
+<script>
+  function porc3 (){
+        var porc3 = $('#porc3').val();
+        
+        var oztc4 =  porc3 * 291.6667;
+        var oztm4 =  porc3 * 321.5075;
+        var ppm2 = porc3 * 10000;
+
+       
+        oztc4 = oztc4.toFixed(5);    
+        $('#oztc4').html(oztc4);
+
+        oztm4 = oztm4.toFixed(5);
+        $('#oztm4').html(oztm4);
+
+        ppm2 = ppm2.toFixed(5);
+        $('#ppm2').html(ppm2);
+       
+  }
+</script>
+<!-- //script porcientos -->
+
+<!-- script porcientos   -->
+<script>
+  function ppm (){
+        var ppm4 = $('#ppm4').val();
+        
+        var porc4 =  ppm4 * 0.0001;
+       
+        porc4 = porc4.toFixed(5);    
+        $('#porc4').html(porc4);
+       
+  }
+</script>
+<!-- //script porcientos -->
+
+
+<!-- script porcientos   -->
+<script>
+  function kgtm5 (){
+        var kgtm5 = $('#kgtm5').val();
+        
+        var oztc5 =  kgtm5 * 29.16667;
+        var oztm5 =  kgtm5 * 32.15075;
+       
+        oztc5 = oztc5.toFixed(5);    
+        $('#oztc5').html(oztc5);
+
+        oztm5 = oztm5.toFixed(5);
+        $('#oztm5').html(oztm5);
+       
+  }
+</script>
+<!-- //script porcientos -->
+
+
+
+</div>
+</main>
+
+{% else %}
+
+  {% include "not_authorized.html" %}
+  
+{% endif %}
+
+
+{% endblock content %}
+{% include "footer.html" %}

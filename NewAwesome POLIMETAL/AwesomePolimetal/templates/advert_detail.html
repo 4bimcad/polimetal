@@ -1,0 +1,100 @@
+{% include "header.html" %}
+
+
+
+<div class="container">
+	<br>
+	<p class="ad-description"> 
+   <small>User: {{ object.author }}
+   <br> Date posted: {{ object.date_posted }}</small>
+	</p>
+<hr>	
+
+<div class="row">
+	<div class="col-md-12">
+    <div class="row">
+  		<div class="col-md-3">
+  			<h4>Advert:			
+  			</h4>   		
+  		</div>
+  		<div class="col-md-9">
+    		<h4> {{ object.name }} 					
+				</h4> 
+  		</div>
+		</div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <h5>Category:      
+        </h5>       
+      </div>
+      <div class="col-md-9">
+        <h5> {{ object.category }}          
+        </h5> 
+      </div>
+    </div>
+
+		<div class="row">
+  		<div class="col-md-3">
+  			<h5>Location:			
+  			</h5>   		
+  		</div>
+  		<div class="col-md-9">
+    		<h5><i class="fa fa-map-marker" aria-hidden="true"></i> {{ object.location }} 					
+				</h5> 
+  		</div>
+		</div>
+<hr>	
+    {%  if user.is_authenticated %}	
+		<div class="row">
+  		<div class="col-md-3">
+  			<b>Description: </b>			   		
+  		</div>
+  		<div class="col-md-9">
+    		{{ object.description|safe }} 					 
+  		</div>
+		</div>
+		<div class="row">
+  		<div class="col-md-3">
+  			<b> Website:</b> 				
+  		</div>
+  		<div class="col-md-9">
+    		<i class="fa fa-globe" aria-hidden="true"></i> {{ object.website }}					
+  		</div>
+		</div>
+		
+		<div class="row">
+  		<div class="col-md-3">
+				<b> E-mail:</b> 					
+  		</div>
+  		<div class="col-md-9">
+    		<i class="fa fa-envelope" aria-hidden="true"></i> {{ object.email }}				 
+  		</div>
+		</div>
+
+		<div class="row">
+  		<div class="col-md-3">
+  			<b> Phone:</b> 			  		
+  		</div>
+  		<div class="col-md-9">
+				<i class="fa fa-phone" aria-hidden="true"></i> {{ object.phone }}					
+  		</div>
+		</div>
+    {% else %}
+    {% include "not_authorized.html" %}
+    {% endif %}
+
+    {% if object.author == user %}
+        <hr>
+        <a class="btn btn-primary btn-sm mt-1 mb-1 ml-1" href="{% url 'advert-update' object.id %}">Update</a>
+        <a class="btn btn-danger btn-sm mt-1 mb-1 ml-1" href="{% url 'advert-delete' object.id %}">Delete</a>
+
+    {% endif %}	
+	</div>	
+</div>
+<hr>
+
+
+
+
+{% include "footer.html" %}

@@ -1,0 +1,48 @@
+{% include "header.html" %}
+
+
+<div class="container">
+
+<br>
+
+<h3>Category: {{ cats }} </h3>
+<hr>
+{% for advert in AdvertCategory %}  	
+ 
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-1">
+        <b>Company:</b>
+      </div>
+      <div class="col-md-2">
+        <a href="{% url 'advert-detail' advert.pk %}">{{ advert.name }}</a>
+      </div>
+      <div class="col-md-1">
+        <b>Category:</b>
+      </div>
+      <div class="col-md-2">
+        {{ advert.category }}
+      </div>
+      <div class="col-md-1">
+        <b>Breve:</b>
+      </div>
+       <div class="col-md-2">
+          {{ advert.breve|slice:"50"|safe }}
+      </div>
+      <div class="col-md-1">
+        <b>Location:</b>
+      </div>
+      <div class="col-md-2">
+          {{ advert.location }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+  {% endfor %}  
+	
+</div>
+
+{% include "footer.html" %}

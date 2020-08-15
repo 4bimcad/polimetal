@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>PoliMETAL.CLUB</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="//unpkg.com/bootstrap-select@1.12.4/dist/js/bootstrap-select.min.js"></script> 
+  <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script> 
+</head>
+<body>
+
+
+<!-- NAV BAR START -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">	
+  <div class="navbar-header">
+   <a class="navbar-brand" href="{% url 'home' %}">
+    {% load static %}
+      <img src="{% static './polimetalclub_logo.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+      PoliMETAL.CLUB
+    </a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  </div>
+  <div class="collapse navbar-collapse font-weight-bold" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-left mr-auto">
+        {%  if user.is_authenticated %}
+				<li><a class="nav-item nav-link" href="{% url 'advert-create' %}">Post a Free Ad</a></li>
+        <li><a class="nav-item nav-link" href="{% url 'company-create' %}">Post a Company</a></li>
+				
+        <!-- <li><li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="help_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Help
+        </a>
+        <div class="dropdown-menu" aria-labelledby="help_dropdown">
+          <a class="dropdown-item" href="#">How Post a Free Ad?</a>
+          <a class="dropdown-item" href="#">How Post a Company?</a>
+        </div>   -->   
+        <li><li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="help_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tools
+        </a>
+        <div class="dropdown-menu" aria-labelledby="help_dropdown">
+          <a class="dropdown-item" href="{% url 'units' %}">Units </a>
+          <a class="dropdown-item" href="{% url 'meters-tons' %}">Meters<sup>3</sup> to Tons</a>
+          <a class="dropdown-item" href="{% url 'es-valor-cu' %}">Valor. Cu [es]</a>
+          <a class="dropdown-item" href="{% url 'es-valor-pb-zn' %}">Valor. Pb, Zn [es]</a>
+          <a class="dropdown-item" href="{% url 'es-valor-au' %}">Valor. Au [es]</a>
+        </div>
+        {% else %}
+        {% endif %}    
+			</ul>
+      <ul class="nav navbar-nav navbar-right ">
+        {%  if user.is_authenticated %}         
+          <li><a class="nav-item nav-link" href=""><i class="fa fa-user">&nbsp;</i>{{ user_display }}{{ user.username }}</a></li>
+          <li><a class="nav-item nav-link" href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i>Log Out</a></li>
+        {% else %}
+          <li><a class="nav-item nav-link" href="{% url 'account_signup' %}"><i class="fa fa-check-square-o"></i> Sign up free</a></li>
+          <li><a class="nav-item nav-link" href="{% url 'account_login' %}"><i class="fa fa-user"></i> Log in</a></li>
+        {% endif %}
+      </ul>
+  </div>
+</nav> 
+<!-- NAV BAR END -->
+<div class="container ">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} col-md-12 text-center">
+        {{ message }}
+      </div> 
+    {% endfor%}
+  {% endif %} 
+</div>
+

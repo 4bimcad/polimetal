@@ -1,0 +1,83 @@
+{% include "header.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{%  if user.is_authenticated %}
+
+<script>
+	function calculate2(){
+				var m32 = $('#m32').val();
+				var d12 = $('#d12').val();
+				var t12 =  m32 * d12;
+						t12 = t12.toFixed(2);	
+				$('#t12').html(t12);
+		}
+
+function calculate(){
+				var t1 = $('#t1').val();
+				var d1 = $('#d1').val();
+				var m3 =  t1 / d1;
+						m3 = m3.toFixed(2);	
+				$('#m3').html(m3);
+		}
+
+
+</script>
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<div class="container">
+
+
+<br>
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-4 card mx-auto">
+					<legend>Converter Tons to </span>M<sup>3</sup></legend>
+					<hr>
+				<p>
+					<label><b>Metric Tons (t)</b></label>
+					<br><input class="form form-control" id="t1" step="0.1" type="number" placeholder="t" oninput="calculate()">
+					<p>
+						<label>Density (t/m<sup>3</sup>) </label>
+						<br><input class="form form-control" id="d1" step="0.1" type="number" placeholder="t/m3" oninput="calculate()">
+					</p>
+					<p>
+						<b><span id="m3" style= "font-size: 2em;" ></span></b> 
+						<span style= "font-size: 1.7em;">m<sup>3</sup></span>  
+					</p>
+				</div>
+				&nbsp;
+				<div class="col-md-4 card mx-auto">
+					<legend>Converter M<sup>3</sup> to T</legend>
+					<hr>
+				<p>
+					<label><b>Cubic Meters (m<sup>3</sup>)</b></label>
+					<br><input class="form form-control" id="m32" step="0.1" type="number" placeholder="m3" oninput="calculate2()">
+					<p>
+						<label>Density (t/m<sup>3</sup>) </label>
+						<br><input class="form form-control" id="d12" step="0.1" type="number" placeholder="t/m3" oninput="calculate2()">
+					</p>
+					<p>
+						<b><span id="t12" style= "font-size: 2em;" ></span></b> 
+						<span style= "font-size: 1.7em;">t</span>  
+					</p>
+					
+				</div>
+			</div>
+		</div>
+		<hr>
+
+</div>
+</main>
+
+{% else %}
+
+	{% include "not_authorized.html" %}
+
+{% endif %}
+
+
+{% endblock content %}
+{% include "footer.html" %}
